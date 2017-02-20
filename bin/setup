@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require "fileutils"
+
+APP_ROOT = File.expand_path("../../",  __FILE__)
+
+Dir.chdir(APP_ROOT) do
+  puts "== Installing dependencies =="
+  system "bundle"
+
+  puts "== Initializing settings =="
+  FileUtils.cp "config/settings.example.yml", "config/settings.yml" unless File.exist?("config/settings.yml")
+
+  puts "== Creating database =="
+  system "createdb wiz_khilafa_development || true"
+  system "createdb wiz_khilafa_test || true"
+
+  puts "== Migrating database =="
+  system "RACK_ENV=development bundle exec rake db:migrate"
+  system "RACK_ENV=test bundle exec rake db:migrate"
+end

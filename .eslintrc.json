@@ -1,0 +1,22 @@
+{
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "globals": {
+    "DEVELOPMENT": true
+  },
+  "plugins": [
+    "standard",
+    "react"
+  ],
+  "rules": {
+    "comma-dangle": [
+      2,
+      "always-multiline"
+    ]
+  }
+}
