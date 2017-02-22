@@ -1,13 +1,16 @@
+require "content_store"
+
 module WizKhilafa
   class Page
-    attr_reader :options
+    attr_reader :options, :content_store
 
     def initialize(options = {})
-      @options = options
+      @options       = options
+      @content_store = ContentStore.new
     end
 
     def view_locals
-      {csrf_tag: csrf_tag}
+      { csrf_tag: csrf_tag }
     end
 
     def csrf_metatag

@@ -1,9 +1,15 @@
-html
+html lang="en-au" class="fonts-loaded"
   head
-    meta charset="utf-8"
-    title WizKhilafa
-    link rel="stylesheet" type="text/css" href=page.assets["public.css"]
-    script type="text/javascript" src=page.assets["public.js"]
+    == page.head
   body
     == page.flash
-    == yield
+    div
+      .masthead.flex-y-center.mx-auto
+        h1.masthead__logo
+          a.masthead__logo-anchor.flex-y-center.flex-x-center href="/"
+            span.masthead__logo-text The Wiz Khilafas
+        == page.nav_main
+      .main-content#main-content role="main"
+        == yield
+    script
+      == page.assets.read("main__main.js")

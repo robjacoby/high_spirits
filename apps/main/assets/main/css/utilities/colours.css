@@ -1,0 +1,39 @@
+.c-white {
+  color: #fff
+}
+
+.bgc-white {
+  background-color: #fff
+}
+
+.bc-white {
+  border-color: #fff
+}
+
+.c-beige {
+  color: #f4f2f0
+}
+
+.bgc-beige {
+  background-color: #f4f2f0
+}
+
+.bc-beige {
+  border-color: #f4f2f0
+}
+
+.c-red,.copy .c-red {
+  color: #e46b7a
+}
+
+.c-blue,.copy .c-blue {
+  color: #0b93b7
+}
+
+.c-green,.copy .c-green {
+  color: #68b2b1
+}
+
+.c-grey,.copy .c-grey {
+  color: #4a4a4a
+}

@@ -1,0 +1,50 @@
+.clearfix:after {
+  clear: both;
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden
+}
+
+.fl-left {
+  float: left
+}
+
+.fl-right {
+  float: right
+}
+
+.d-inline {
+  display: inline
+}
+
+.d-inlineblock {
+  display: inline-block
+}
+
+.d-block {
+  display: block
+}
+
+.d-table {
+  display: table
+}
+
+.d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex
+}
+
+.flex-x-center {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center
+}
+
+.flex-y-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center
+}

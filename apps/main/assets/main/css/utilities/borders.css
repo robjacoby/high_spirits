@@ -1,0 +1,27 @@
+.br-none {
+  border-radius: 0
+}
+
+.br-xsmall {
+  border-radius: 1px
+}
+
+.br-small {
+  border-radius: 2px
+}
+
+.br-medium {
+  border-radius: 3px
+}
+
+.br-large {
+  border-radius: 5px
+}
+
+.br-huge {
+  border-radius: 8px
+}
+
+.br-circle {
+  border-radius: 50%
+}

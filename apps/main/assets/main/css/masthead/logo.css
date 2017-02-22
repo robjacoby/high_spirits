@@ -1,0 +1,16 @@
+.masthead__logo {}
+
+.masthead__logo-anchor {
+  color: #bd8951;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: Trebuchet MS,Helvetica Neue,Helvetica,sans-serif;
+  font-size: 4rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.fonts-loaded .masthead__logo-anchor {
+  font-family: "Sancreek",Trebuchet MS,Helvetica Neue,Helvetica,sans-serif;
+}

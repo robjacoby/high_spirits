@@ -1,0 +1,149 @@
+.p-xsmall {
+  padding: .5rem
+}
+
+.p-small {
+  padding: 1rem
+}
+
+.p-medium {
+  padding: 1.5rem
+}
+
+.p-large {
+  padding: 2rem
+}
+
+.p-xlarge {
+  padding: 3rem
+}
+
+.pt-xsmall {
+  padding-top: .5rem
+}
+
+.pt-small {
+  padding-top: 1rem
+}
+
+.pt-medium {
+  padding-top: 1.5rem
+}
+
+.pt-large {
+  padding-top: 2rem
+}
+
+.pt-xlarge {
+  padding-top: 3rem
+}
+
+.pr-xsmall {
+  padding-right: .5rem
+}
+
+.pr-small {
+  padding-right: 1rem
+}
+
+.pr-medium {
+  padding-right: 1.5rem
+}
+
+.pr-large {
+  padding-right: 2rem
+}
+
+.pr-xlarge {
+  padding-right: 3rem
+}
+
+.pb-xsmall {
+  padding-bottom: .5rem
+}
+
+.pb-small {
+  padding-bottom: 1rem
+}
+
+.pb-medium {
+  padding-bottom: 1.5rem
+}
+
+.pb-large {
+  padding-bottom: 2rem
+}
+
+.pb-xlarge {
+  padding-bottom: 3rem
+}
+
+.pl-xsmall {
+  padding-left: .5rem
+}
+
+.pl-small {
+  padding-left: 1rem
+}
+
+.pl-medium {
+  padding-left: 1.5rem
+}
+
+.pl-large {
+  padding-left: 2rem
+}
+
+.pl-xlarge {
+  padding-left: 3rem
+}
+
+.py-xsmall {
+  padding-top: .5rem;
+  padding-bottom: .5rem
+}
+
+.py-small {
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
+.py-medium {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem
+}
+
+.py-large {
+  padding-top: 2rem;
+  padding-bottom: 2rem
+}
+
+.py-xlarge {
+  padding-top: 3rem;
+  padding-bottom: 3rem
+}
+
+.px-xsmall {
+  padding-left: .5rem;
+  padding-right: .5rem
+}
+
+.px-small {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
+.px-medium {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
+.px-large {
+  padding-left: 2rem;
+  padding-right: 2rem
+}
+
+.px-xlarge {
+  padding-left: 3rem;
+  padding-right: 3rem
+}

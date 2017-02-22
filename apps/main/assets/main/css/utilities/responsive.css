@@ -1,0 +1,32 @@
+.breakpoint-desktop .hide-desktop,
+.breakpoint-phone .hide-phone,
+.breakpoint-tablet-wide .hide-tablet-wide,
+.breakpoint-tablet .hide-tablet,
+.breakpoint-widescreen .hide-widescreen,
+.hide-all {
+  display: none
+}
+
+.breakpoint-desktop .show-desktop,
+.breakpoint-phone .show-phone,
+.breakpoint-tablet-wide .show-tablet-wide,
+.breakpoint-tablet .show-tablet,
+.breakpoint-widescreen .show-widescreen {
+  display: block
+}
+
+.breakpoint-desktop .show-desktop--i,
+.breakpoint-phone .show-phone--i,
+.breakpoint-tablet-wide .show-tablet-wide--i,
+.breakpoint-tablet .show-tablet--i,
+.breakpoint-widescreen .show-widescreen--i {
+  display: inline
+}
+
+.breakpoint-desktop .show-desktop--ib,
+.breakpoint-phone .show-phone--ib,
+.breakpoint-tablet-wide .show-tablet-wide--ib,
+.breakpoint-tablet .show-tablet--ib,
+.breakpoint-widescreen .show-widescreen--ib {
+  display: inline-block
+}
