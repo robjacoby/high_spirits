@@ -30,6 +30,38 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: distilleries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE distilleries (
+    id integer NOT NULL,
+    name text NOT NULL,
+    location text NOT NULL,
+    region text NOT NULL,
+    owned_by text
+);
+
+
+--
+-- Name: distilleries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE distilleries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: distilleries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE distilleries_id_seq OWNED BY distilleries.id;
+
+
+--
 -- Name: que_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -81,10 +113,25 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY distilleries ALTER COLUMN id SET DEFAULT nextval('distilleries_id_seq'::regclass);
+
+
+--
 -- Name: job_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY que_jobs ALTER COLUMN job_id SET DEFAULT nextval('que_jobs_job_id_seq'::regclass);
+
+
+--
+-- Name: distilleries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY distilleries
+    ADD CONSTRAINT distilleries_pkey PRIMARY KEY (id);
 
 
 --
