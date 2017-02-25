@@ -1,13 +1,13 @@
 require "open-uri"
 
-module WizKhilafa
+module HighSpirits
   class Assets
     attr_reader :root
     attr_reader :precompiled
     attr_reader :precompiled_host
     attr_reader :server_url
 
-    def self.new(container = WizKhilafa::Container)
+    def self.new(container = HighSpirits::Container)
       super(
         root: container.config.root,
         precompiled: container.settings.precompiled_assets,

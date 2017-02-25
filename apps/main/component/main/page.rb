@@ -1,6 +1,6 @@
-require "wiz_khilafa/page"
+require "high_spirits/page"
 
 module Main
-  class Page < WizKhilafa::Page
+  class Page < HighSpirits::Page
   end
 end

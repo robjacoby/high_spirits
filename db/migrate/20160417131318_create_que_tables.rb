@@ -1,6 +1,6 @@
 ROM::SQL.migration do
   change do
-    WizKhilafa::Container.boot! :que
+    HighSpirits::Container.boot! :que
     Que.migrate!
   end
 end

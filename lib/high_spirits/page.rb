@@ -1,6 +1,6 @@
 require "content_store"
 
-module WizKhilafa
+module HighSpirits
   class Page
     attr_reader :options, :content_store
 

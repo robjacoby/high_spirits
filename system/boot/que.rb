@@ -1,6 +1,6 @@
 require "que"
 
-WizKhilafa::Container.namespace :que do |container|
+HighSpirits::Container.namespace :que do |container|
   container.finalize :que do
     container.boot! :logger
     container.boot :rom

@@ -1,6 +1,6 @@
 require "bugsnag"
 
-module WizKhilafa
+module HighSpirits
   class Application < Roda
     use Bugsnag::Rack
 

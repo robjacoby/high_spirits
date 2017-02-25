@@ -4,10 +4,10 @@ require "dry-view"
 require "main/container"
 require "main/page"
 
-require "wiz_khilafa/assets"
+require "high_spirits/assets"
 
 module Main
-  Container.register "page", Page.new(assets: WizKhilafa::Assets.new)
+  Container.register "page", Page.new(assets: HighSpirits::Assets.new)
 
   class View < Dry::View::Layout
     setting :root, Container.root.join("web/templates")

@@ -1,7 +1,7 @@
 require "dry-configurable"
 require "dry-transaction"
 
-module WizKhilafa
+module HighSpirits
   class Transactions
     extend Dry::Configurable
 

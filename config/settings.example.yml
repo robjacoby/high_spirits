@@ -1,6 +1,6 @@
 development: &base
   session_secret: xxx
-  database_url: 'postgres://localhost/wiz_khilafa_development'
+  database_url: 'postgres://localhost/high_spirits_development'
   assets_server_url: "http://localhost:8080"
   precompiled_assets: false
   precompiled_assets_host:
@@ -9,7 +9,7 @@ development: &base
   postmark_api_key:
 test:
   <<: *base
-  database_url: 'postgres://localhost/wiz_khilafa_test'
+  database_url: 'postgres://localhost/high_spirits_test'
   postmark_api_key: 'POSTMARK_API_TEST'
 production:
   <<: *base

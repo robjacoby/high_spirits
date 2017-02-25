@@ -1,2 +1,2 @@
 require_relative "system/boot"
-run WizKhilafa::Application.freeze.app
+run HighSpirits::Application.freeze.app

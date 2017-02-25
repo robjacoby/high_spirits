@@ -21,7 +21,7 @@ module Main
 
       def attache_url_for(file_path)
         prefix, basename = File.split(file_path)
-        [WizKhilafa::Container.settings.assets_server_url, "assets", prefix, CGI.escape(basename)].join("/")
+        [HighSpirits::Container.settings.assets_server_url, "assets", prefix, CGI.escape(basename)].join("/")
       end
     end
   end

@@ -2,12 +2,12 @@ require "dry-equalizer"
 require "dry-view"
 require "slim"
 require "tilt/erb"
-require "wiz_khilafa/import"
+require "high_spirits/import"
 
-module WizKhilafa
+module HighSpirits
   class Email < Dry::View::Layout
     include Dry::Equalizer(:to_h)
-    include WizKhilafa::HashImport["i18n.t"]
+    include HighSpirits::HashImport["i18n.t"]
 
     attr_reader :options
 

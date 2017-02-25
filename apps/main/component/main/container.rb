@@ -1,7 +1,7 @@
 module Main
   class Container < Dry::Web::Container
-    require root.join("system/wiz_khilafa/container")
-    import WizKhilafa::Container
+    require root.join("system/high_spirits/container")
+    import HighSpirits::Container
 
     configure do |config|
       config.name = :main

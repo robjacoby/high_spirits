@@ -1,9 +1,9 @@
-require 'wiz_khilafa/repository'
+require 'high_spirits/repository'
 
 module Main
   module Persistence
     module Repositories
-      class Distilleries < WizKhilafa::Repository[:distilleries]
+      class Distilleries < HighSpirits::Repository[:distilleries]
         relations :distilleries
         commands :create
       end

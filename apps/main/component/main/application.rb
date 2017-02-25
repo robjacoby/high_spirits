@@ -13,7 +13,7 @@ module Main
 
     opts[:root] = Pathname(__FILE__).join("../..").realpath.dirname
 
-    use Rack::Session::Cookie, key: "wiz_khilafa.session", secret: WizKhilafa::Container.settings.session_secret
+    use Rack::Session::Cookie, key: "high_spirits.session", secret: HighSpirits::Container.settings.session_secret
     use Rack::Csrf, raise: true
     use Rack::MethodOverride
     use Bugsnag::Rack

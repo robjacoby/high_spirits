@@ -2,11 +2,11 @@ module TestHelpers
   module_function
 
   def container
-    WizKhilafa::Container
+    HighSpirits::Container
   end
 
   def app
-    WizKhilafa::Application.app
+    HighSpirits::Application.app
   end
 
   def rom

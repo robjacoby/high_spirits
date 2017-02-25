@@ -1,7 +1,7 @@
 require "dry/web/settings"
 require "dry-types"
 
-module WizKhilafa
+module HighSpirits
   class Settings < Dry::Web::Settings
     module Types
       include Dry::Types.module

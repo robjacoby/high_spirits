@@ -1,4 +1,4 @@
-# WizKhilafa
+# HighSpirits
 
 ## Development
 

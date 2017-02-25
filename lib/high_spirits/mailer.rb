@@ -1,11 +1,11 @@
-require "wiz_khilafa/import"
+require "high_spirits/import"
 
-module WizKhilafa
+module HighSpirits
   class Mailer
-    include WizKhilafa::Import("logger", "postmark")
+    include HighSpirits::Import("logger", "postmark")
 
     def deliver(mail)
-      logger.debug("[WizKhilafa::Mailer] delivering: #{mail.inspect}")
+      logger.debug("[HighSpirits::Mailer] delivering: #{mail.inspect}")
       postmark.deliver(mail.to_h.merge(from: from))
     end
 

@@ -10,9 +10,9 @@ begin
 rescue LoadError
 end
 
-require_relative "system/wiz_khilafa/container"
+require_relative "system/high_spirits/container"
 
-WizKhilafa::Container.boot! :bugsnag
+HighSpirits::Container.boot! :bugsnag
 require "bugsnag/rake"
 require "bugsnag/tasks"
 
@@ -20,12 +20,12 @@ require "rom/sql/rake_task"
 require "sequel"
 namespace :db do
   task :setup do
-    WizKhilafa::Container.boot!(:rom)
+    HighSpirits::Container.boot!(:rom)
   end
 
   # The following migration tasks are adapted from https://gist.github.com/kalmbach/4471560
   Sequel.extension :migration
-  DB = Sequel.connect(WizKhilafa::Container.settings.database_url)
+  DB = Sequel.connect(HighSpirits::Container.settings.database_url)
 
   desc "Prints current schema version"
   task :version do
@@ -97,6 +97,6 @@ namespace :assets do
   desc "Remove compiled assets"
   task :clobber do
     require "fileutils"
-    FileUtils.rm_rf("#{WizKhilafa::Container.config.root}/public/assets")
+    FileUtils.rm_rf("#{HighSpirits::Container.config.root}/public/assets")
   end
 end

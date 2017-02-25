@@ -67,20 +67,20 @@ end
 
 ## Repositories
 
-The skeleton provides a [basic application repository class](/lib/wiz_khilafa/repository.rb), which makes the ROM container available to any repository subclasses you make inside the sub-apps.
+The skeleton provides a [basic application repository class](/lib/high_spirits/repository.rb), which makes the ROM container available to any repository subclasses you make inside the sub-apps.
 
 Each sub-app should provide its own repositories, since these act as the primary interface to the persisted data, and each sub-app will have its own differing sets of needs.
 
 An example repository from one of our apps is `apps/admin/lib/main/persistence/repositories/users.rb`:
 
 ```ruby
-require "wiz_khilafa/repository"
+require "high_spirits/repository"
 require "admin/entities/user"
 
 module Admin
   module Persistence
     module Repositories
-      class Users < WizKhilafa::Repository[:users]
+      class Users < HighSpirits::Repository[:users]
         commands :create, update: [:by_id, :by_email]
 
         alias_method :update, :update_by_id

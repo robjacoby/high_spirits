@@ -1,4 +1,4 @@
-WizKhilafa::Container.namespace(:i18n) do |container|
+HighSpirits::Container.namespace(:i18n) do |container|
   load_paths = Dir["#{container.root}/apps/**/locales/**/*.yml"]
 
   container.finalize(:i18n) do

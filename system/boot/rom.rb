@@ -1,4 +1,4 @@
-WizKhilafa::Container.namespace "persistence" do |persistence|
+HighSpirits::Container.namespace "persistence" do |persistence|
   persistence.finalize(:rom) do
     init do
       require "sequel"

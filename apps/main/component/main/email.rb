@@ -1,8 +1,8 @@
-require "wiz_khilafa/email"
+require "high_spirits/email"
 require "main/container"
 
 module Main
-  class Email < WizKhilafa::Email
+  class Email < HighSpirits::Email
     configure do |config|
       config.root = Container.root.join("emails")
       config.name = "email"

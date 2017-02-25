@@ -1,12 +1,12 @@
 require "dry-transaction"
 require "dry-monads"
 
-require "wiz_khilafa/transactions"
+require "high_spirits/transactions"
 require "main/container"
 require "main/import"
 
 module Main
-  class Transactions < WizKhilafa::Transactions
+  class Transactions < HighSpirits::Transactions
     class StepAdapters < Dry::Transaction::StepAdapters
       class Enqueue
         include Main::Import("enqueue")
