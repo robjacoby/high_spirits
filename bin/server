@@ -1,0 +1,8 @@
+#! /usr/bin/env ruby
+
+APP_ROOT = File.expand_path("../../",  __FILE__)
+
+Dir.chdir(APP_ROOT) do
+  puts "starting development server"
+  system "bundle exec shotgun -p 3000 -o 0.0.0.0 config.ru"
+end
