@@ -76,6 +76,19 @@ ALTER SEQUENCE bottles_id_seq OWNED BY bottles.id;
 
 
 --
+-- Name: bottles_whiskies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE bottles_whiskies (
+    bottle_id integer,
+    whisky_id integer,
+    volume integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+
+--
 -- Name: distilleries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -270,6 +283,13 @@ ALTER TABLE ONLY whiskies
 --
 
 CREATE TRIGGER set_updated_at_on_bottles BEFORE UPDATE ON bottles FOR EACH ROW EXECUTE PROCEDURE set_updated_at_column();
+
+
+--
+-- Name: set_updated_at_on_bottles_whiskies; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER set_updated_at_on_bottles_whiskies BEFORE UPDATE ON bottles_whiskies FOR EACH ROW EXECUTE PROCEDURE set_updated_at_column();
 
 
 --
