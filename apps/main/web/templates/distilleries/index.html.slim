@@ -1,0 +1,15 @@
+- if distilleries.any?
+  ul
+    - distilleries.each do |distillery|
+      li
+        span Name
+        = distillery.name
+        br
+        span Location
+        = distillery.location
+        br
+        span Region
+        = distillery.region
+        br
+        span Owned By
+        = distillery.owned_by
