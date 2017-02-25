@@ -14,7 +14,7 @@ module Main
         end
 
         def locals(options = {})
-          super(options).merge(distilleries: distilleries.all.to_a)
+          super(options).merge(distilleries: distilleries.all)
         end
 
       end

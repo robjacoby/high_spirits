@@ -9,7 +9,9 @@ module Main
         commands :create
 
         def all
-          distilleries.as(Entities::Distillery)
+          distilleries
+            .as(Entities::Distillery)
+            .to_a
         end
       end
     end

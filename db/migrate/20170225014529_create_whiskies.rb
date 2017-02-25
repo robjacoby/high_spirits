@@ -3,11 +3,11 @@ ROM::SQL.migration do
     create_table :whiskies do
       primary_key :id
       String :name
-      String :age_statement
-      Integer :year_released
-      Integer :cask_number
-      Integer :batch_number
-      Float :abv
+      Integer :age_statement
+      Date :bottled_on
+      String :cask_number
+      String :batch_number
+      Float :abv, null: false
       foreign_key :distillery_id
       DateTime :created_at, null: false, default: Sequel.lit("(now() at time zone 'utc')")
       DateTime :updated_at, null: false,  default: Sequel.lit("(now() at time zone 'utc')")

@@ -180,11 +180,11 @@ CREATE TABLE schema_migrations (
 CREATE TABLE whiskies (
     id integer NOT NULL,
     name text,
-    age_statement text,
-    year_released integer,
-    cask_number integer,
-    batch_number integer,
-    abv double precision,
+    age_statement integer,
+    bottled_on date,
+    cask_number text,
+    batch_number text,
+    abv double precision NOT NULL,
     distillery_id integer,
     created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     updated_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL

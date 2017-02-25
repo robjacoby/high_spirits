@@ -7,7 +7,7 @@ module Main
         required(:name).filled(:str?)
         required(:location).filled(:str?)
         required(:region).filled(:str?)
-        optional(:owned_by).filled(:str?)
+        required(:owned_by).maybe(:str?)
       end
     end
   end

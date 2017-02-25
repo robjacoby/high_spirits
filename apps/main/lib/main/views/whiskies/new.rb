@@ -2,10 +2,10 @@ require 'main/view'
 
 module Main
   module Views
-    module Distilleries
+    module Whiskies
       class New < Main::View
         configure do |config|
-          config.template = "distilleries/new"
+          config.template = "whiskies/new"
         end
 
         def locals(options = {})
