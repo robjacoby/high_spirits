@@ -2,7 +2,7 @@ module Main
   class Application
     route "whiskies" do |r|
 
-      r.get do
+      r.is do
         r.view 'whiskies.index'
       end
 
