@@ -2,7 +2,7 @@ ROM::SQL.migration do
   up do
     create_table :bottles do
       primary_key :id
-      String :name
+      String :name, null: false
       Integer :volume, null: false, default: 0
       DateTime :created_at, null: false, default: Sequel.lit("(now() at time zone 'utc')")
       DateTime :updated_at, null: false,  default: Sequel.lit("(now() at time zone 'utc')")

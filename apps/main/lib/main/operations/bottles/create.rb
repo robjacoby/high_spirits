@@ -1,27 +1,27 @@
 require 'main/import'
-require 'main/entities/whisky'
-require 'main/validation/whiskies/form'
+require 'main/entities/bottle'
+require 'main/validation/bottles/form'
 require 'dry-result_matcher'
 require 'dry-monads'
 
 module Main
   module Operations
-    module Whiskies
+    module Bottles
       class Create
         include Main::Import(
-          'main.persistence.repositories.whiskies'
+          'main.persistence.repositories.bottles'
         )
 
         include Dry::ResultMatcher.for(:call)
         include Dry::Monads::Either::Mixin
 
         def call(attributes)
-          validation = Validation::Whiskies::Form.(attributes)
+          validation = Validation::Bottles::Form.(attributes)
 
           if validation.success?
-            whisky = Entities::Whisky.new(whiskies.create(validation.output))
+            bottle = Entities::Bottle.new(bottles.create(validation.output))
 
-            Right(whisky)
+            Right(bottle)
           else
             Left(validation)
           end
