@@ -123,6 +123,16 @@ ALTER SEQUENCE distilleries_id_seq OWNED BY distilleries.id;
 
 
 --
+-- Name: event_streams; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE event_streams (
+    data text DEFAULT '{}'::text NOT NULL,
+    created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+
+--
 -- Name: que_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
