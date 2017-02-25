@@ -1,30 +1,25 @@
 ROM::SQL.migration do
   up do
-    create_table :whiskies do
+    create_table :bottles do
       primary_key :id
       String :name
-      String :age_statement
-      Integer :year_released
-      Integer :cask_number
-      Integer :batch_number
-      Float :abv
-      foreign_key :distillery_id
+      Integer :volume, null: false, default: 0
       DateTime :created_at, null: false, default: Sequel.lit("(now() at time zone 'utc')")
       DateTime :updated_at, null: false,  default: Sequel.lit("(now() at time zone 'utc')")
     end
 
     run <<-SQL
-      CREATE TRIGGER set_updated_at_on_whiskies
-        BEFORE UPDATE ON whiskies FOR EACH ROW
+      CREATE TRIGGER set_updated_at_on_bottles
+        BEFORE UPDATE ON bottles FOR EACH ROW
         EXECUTE PROCEDURE set_updated_at_column();
     SQL
   end
 
   down do
     run <<-SQL
-      DROP TRIGGER IF EXISTS set_updated_at_on_whiskies ON whiskies;
+      DROP TRIGGER IF EXISTS set_updated_at_on_bottles ON bottles;
     SQL
 
-    drop_table :whiskies
+    drop_table :bottles
   end
 end

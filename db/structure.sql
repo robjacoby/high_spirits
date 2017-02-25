@@ -25,9 +25,55 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
+--
+-- Name: set_updated_at_column(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION set_updated_at_column() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+      BEGIN
+        NEW.updated_at = CURRENT_TIMESTAMP;
+        RETURN NEW;
+      END;
+      $$;
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+--
+-- Name: bottles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE bottles (
+    id integer NOT NULL,
+    name text,
+    volume integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+
+--
+-- Name: bottles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE bottles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: bottles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE bottles_id_seq OWNED BY bottles.id;
+
 
 --
 -- Name: distilleries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
@@ -38,7 +84,9 @@ CREATE TABLE distilleries (
     name text NOT NULL,
     location text NOT NULL,
     region text NOT NULL,
-    owned_by text
+    owned_by text,
+    created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
 
@@ -113,6 +161,50 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: whiskies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE whiskies (
+    id integer NOT NULL,
+    name text,
+    age_statement text,
+    year_released integer,
+    cask_number integer,
+    batch_number integer,
+    abv double precision,
+    distillery_id integer,
+    created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+
+--
+-- Name: whiskies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE whiskies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: whiskies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE whiskies_id_seq OWNED BY whiskies.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY bottles ALTER COLUMN id SET DEFAULT nextval('bottles_id_seq'::regclass);
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -124,6 +216,21 @@ ALTER TABLE ONLY distilleries ALTER COLUMN id SET DEFAULT nextval('distilleries_
 --
 
 ALTER TABLE ONLY que_jobs ALTER COLUMN job_id SET DEFAULT nextval('que_jobs_job_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY whiskies ALTER COLUMN id SET DEFAULT nextval('whiskies_id_seq'::regclass);
+
+
+--
+-- Name: bottles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY bottles
+    ADD CONSTRAINT bottles_pkey PRIMARY KEY (id);
 
 
 --
@@ -148,6 +255,35 @@ ALTER TABLE ONLY que_jobs
 
 ALTER TABLE ONLY schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (filename);
+
+
+--
+-- Name: whiskies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY whiskies
+    ADD CONSTRAINT whiskies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: set_updated_at_on_bottles; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER set_updated_at_on_bottles BEFORE UPDATE ON bottles FOR EACH ROW EXECUTE PROCEDURE set_updated_at_column();
+
+
+--
+-- Name: set_updated_at_on_distilleries; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER set_updated_at_on_distilleries BEFORE UPDATE ON distilleries FOR EACH ROW EXECUTE PROCEDURE set_updated_at_column();
+
+
+--
+-- Name: set_updated_at_on_whiskies; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER set_updated_at_on_whiskies BEFORE UPDATE ON whiskies FOR EACH ROW EXECUTE PROCEDURE set_updated_at_column();
 
 
 --

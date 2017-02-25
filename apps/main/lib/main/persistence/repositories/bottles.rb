@@ -3,8 +3,8 @@ require 'wiz_khilafa/repository'
 module Main
   module Persistence
     module Repositories
-      class Whiskies < WizKhilafa::Repository[:whiskies]
-        relations :whiskies
+      class Bottles < WizKhilafa::Repository[:bottles]
+        relations :bottles
         commands :create
       end
     end
