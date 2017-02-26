@@ -8,6 +8,10 @@ module Main
         relations :bottles
         commands :create
 
+        def find(id)
+          bottles.where(id: id).as(Entities::Bottle).one
+        end
+
         def all
           bottles
             .as(Entities::Bottle)

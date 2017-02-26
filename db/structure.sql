@@ -23,6 +23,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
 SET search_path = public, pg_catalog;
 
 --
@@ -44,12 +58,23 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: blends; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE blends (
+    bottle_id integer,
+    total_amount double precision DEFAULT 0.0 NOT NULL,
+    whiskies json DEFAULT '[]'::json NOT NULL
+);
+
+
+--
 -- Name: bottles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bottles (
     id integer NOT NULL,
-    name text,
+    name text NOT NULL,
     volume integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
     updated_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
@@ -73,19 +98,6 @@ CREATE SEQUENCE bottles_id_seq
 --
 
 ALTER SEQUENCE bottles_id_seq OWNED BY bottles.id;
-
-
---
--- Name: bottles_whiskies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE bottles_whiskies (
-    bottle_id integer,
-    whisky_id integer,
-    volume integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
-    updated_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
-);
 
 
 --
@@ -123,13 +135,35 @@ ALTER SEQUENCE distilleries_id_seq OWNED BY distilleries.id;
 
 
 --
--- Name: event_streams; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE event_streams (
-    data text DEFAULT '{}'::text NOT NULL,
+CREATE TABLE events (
+    sequence bigint NOT NULL,
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    type text NOT NULL,
+    body json NOT NULL,
     created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+
+
+--
+-- Name: events_sequence_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE events_sequence_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: events_sequence_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE events_sequence_seq OWNED BY events.sequence;
 
 
 --
@@ -235,6 +269,13 @@ ALTER TABLE ONLY distilleries ALTER COLUMN id SET DEFAULT nextval('distilleries_
 
 
 --
+-- Name: sequence; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY events ALTER COLUMN sequence SET DEFAULT nextval('events_sequence_seq'::regclass);
+
+
+--
 -- Name: job_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -262,6 +303,14 @@ ALTER TABLE ONLY bottles
 
 ALTER TABLE ONLY distilleries
     ADD CONSTRAINT distilleries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_pkey PRIMARY KEY (sequence);
 
 
 --
@@ -293,13 +342,6 @@ ALTER TABLE ONLY whiskies
 --
 
 CREATE TRIGGER set_updated_at_on_bottles BEFORE UPDATE ON bottles FOR EACH ROW EXECUTE PROCEDURE set_updated_at_column();
-
-
---
--- Name: set_updated_at_on_bottles_whiskies; Type: TRIGGER; Schema: public; Owner: -
---
-
-CREATE TRIGGER set_updated_at_on_bottles_whiskies BEFORE UPDATE ON bottles_whiskies FOR EACH ROW EXECUTE PROCEDURE set_updated_at_column();
 
 
 --
