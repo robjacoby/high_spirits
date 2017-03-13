@@ -19,7 +19,7 @@ module Main
           end
 
           query
-            .as(Entities::Event)
+            .as(Entities::EventWithSequence)
             .to_a
         end
       end

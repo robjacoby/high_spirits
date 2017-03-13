@@ -100,3 +100,11 @@ namespace :assets do
     FileUtils.rm_rf("#{HighSpirits::Container.config.root}/public/assets")
   end
 end
+
+namespace :events do
+  task :poll_for_whiskies do
+    require './system/boot'
+    require 'high_spirits/events/listeners/add_whisky_to_blend'
+    HighSpirits::Events::Listeners::AddWhiskyToBlend.new.call
+  end
+end
