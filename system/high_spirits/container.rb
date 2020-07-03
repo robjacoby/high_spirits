@@ -1,12 +1,11 @@
 require "dry/web/container"
-require "dry/web/umbrella"
 require_relative "settings"
 
 module HighSpirits
-  class Container < Dry::Web::Umbrella
+  class Container < Dry::Web::Container
     configure do |config|
       config.name = :core
-      config.settings_loader = HighSpirits::Settings
+      # config.settings_loader = HighSpirits::Settings
       config.auto_register = %w[lib/authentication]
     end
 
