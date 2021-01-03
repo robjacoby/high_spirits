@@ -1,6 +1,6 @@
 var path = require("path");
 var webpack = require("webpack");
-var merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 var WebpackNotifierPlugin = require("webpack-notifier");
 var baseConfig = require('./webpack-base.config.js');
 var applicationConfig = require('./webpack-application.config.js');
@@ -18,7 +18,6 @@ var DEVELOPMENT_PORT = config.ASSETS_DEVELOPMENT_SERVER_PORT || 8080;
  * @type {Array}
  */
 var plugins = [
-  new webpack.NoErrorsPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.DefinePlugin({
     DEVELOPMENT: true

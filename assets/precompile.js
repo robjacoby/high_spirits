@@ -1,12 +1,11 @@
 var del = require("del");
-var gulp = require("gulp");
+const { series, src, dest } = require("gulp");
 var gulpJsoncombine = require("gulp-jsoncombine");
 var gulpManifest = require("gulp-rev-rails-manifest");
 var gulpMd5 = require("gulp-md5");
 var gulpRevAll = require("gulp-rev-all");
 var gulpTap = require("gulp-tap");
 var path = require("path");
-var runSequence = require("run-sequence");
 
 
 /**
@@ -20,25 +19,25 @@ var DEST  = path.join(__dirname, "..", "public", "assets")
  * Create digested versions of files using gulp-rev-all using the already built
  * files in the `BUILD` directory
  */
-gulp.task("manifest:digest", function(cb) {
+function digest(cb) {
   console.log("Starting manifest:digest task");
-  var stream = gulp.src(BUILD+"/**/*")
+  var stream = src(BUILD+"/**/*")
     .pipe(gulpRevAll({
       quiet: true,
       silent: true,
       transformFilename: function (file, hash) {
-        var ext = path.extname(file.path);
-        return path.basename(file.path, ext) + "-" + hash + ext;
+        var ext = extname(file.path);
+        return basename(file.path, ext) + "-" + hash + ext;
       }
     }))
-    .pipe(gulp.dest(DEST))
+    .pipe(dest(DEST))
     .pipe(gulpManifest())
-    .pipe(gulp.dest(DEST));
+    .pipe(dest(DEST));
   stream.on("end", function() {
     console.log("Completed manifest:digest task");
     cb();
   });
-});
+}
 
 
 /**
@@ -48,9 +47,9 @@ gulp.task("manifest:digest", function(cb) {
  */
 var finalManifest;
 
-gulp.task("manifest:combine", ["manifest:digest"], function(cb) {
+function combine(cb) {
   console.log("Started manifest:combine task");
-  var stream = gulp.src(DEST+"/manifest*")
+  var stream = src(DEST+"/manifest*")
     .pipe(gulpJsoncombine("manifest.json", function(data) {
 
       // Merge the various manifest.json properties together
@@ -76,31 +75,31 @@ gulp.task("manifest:combine", ["manifest:digest"], function(cb) {
       var splitPath = file.path.split("/");
       finalManifest = splitPath[splitPath.length - 1];
     }))
-    .pipe(gulp.dest(DEST));
+    .pipe(dest(DEST));
   stream.on("end", function() {
     console.log("Completed manifest:combine task");
     cb();
   });
-});
+}
 
 
 /**
  * Delete the original manifest files
  */
-gulp.task("manifest:clean", ["manifest:combine", "manifest:digest"], function(cb) {
+function clean(cb) {
   console.log("Started manifest:clean");
   del([
     DEST+"/manifest*",
     "!"+DEST+"/"+finalManifest
     ], {force: true}, cb);
-});
+}
 
 
 /**
  * Run our gulp tasks in order
  */
-runSequence([
-  "manifest:digest",
-  "manifest:combine",
-  "manifest:clean"
-]);
+exports.default = series(
+  digest,
+  combine,
+  clean
+);

@@ -16,14 +16,8 @@ var BUILD     = path.join(__dirname, "build");
 /**
  * Custom webpack plugins
  */
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-/**
- * PostCSS packages
- */
-var cssimport = require("postcss-import");
-var cssnext = require("postcss-cssnext");
-var modulesValues = require("postcss-modules-values");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 /**
  * configureEntries
@@ -82,33 +76,17 @@ module.exports = function createBaseConfig (options) {
       filename: "[name].js",
     },
 
-    // Post-CSS configuration
-    postcss: function(webpack) {
-      return {
-        defaults: [
-          modulesValues,
-          cssimport({
-            addDependencyTo: webpack
-          }),
-          cssnext()
-        ]
-      };
-    },
-
     // Plugins
     plugins: [
       // Extract all CSS into static files
-      new ExtractTextPlugin("[name].css", {
-        allChunks: true
+      // new MiniCssExtractPlugin(),
+      new ESLintPlugin({
+        context: APPS_BASE,
+        files: APPS,
+        emitError: false,
+        emitWarning: true
       })
     ],
-
-    // eslint configuration
-    eslint: {
-      configFile: path.join(__dirname, "../.eslintrc.json"),
-      emitError: false,
-      emitWarning: true
-    },
 
     // Resolve formalist-theme and shared
     resolve: {
@@ -119,26 +97,37 @@ module.exports = function createBaseConfig (options) {
 
     // General configuration
     module: {
-      loaders: [
+      rules: [
         {
-          test: /\.js/,
-          loaders: [
-            "babel?presets[]=react,presets[]=es2015",
-            "eslint-loader"
-          ],
-          include: APPS
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'style-loader',
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+              }
+            },
+            {
+              loader: 'postcss-loader'
+            }
+          ]
         },
         {
           test: /\.(jpe?g|png|gif|svg|woff|ttf|otf|eot|ico)/,
-          loader: "file-loader?name=[path][name].[ext]"
+          loader: "file-loader",
+          options: {
+            name: "[path][name].[ext]"
+          }
         },
-        {
-          test: /\.css$/,
-          // The ExtractTextPlugin pulls all CSS out into static files
-          // rather than inside the JavaScript/webpack bundle
-          loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
-        }
-      ]
+        // {
+        //   test: /\.css$/i,
+        //   use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        // },
+      ],
     }
   };
 
